@@ -1,4 +1,4 @@
-To run this u will need c++ std libs, ncurses libs and make
+To run this u will need g++ compiler for c++, ncurses libs and make
 
 ncurses install for Ubuntu:
 sudo apt-get install libncurses5-dev libncursesw5-dev
