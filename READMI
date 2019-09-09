@@ -1,0 +1,9 @@
+To run this u will need c++ std libs, ncurses libs and make
+
+ncurses install for Ubuntu:
+sudo apt-get install libncurses5-dev libncursesw5-dev
+
+When you in CURSE folder just:
+make game
+
+Enjoy (kidding) :/
