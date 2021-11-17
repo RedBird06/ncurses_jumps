@@ -1,8 +1,13 @@
-#include "./headers/canvas.h"
+#include <NJCanvas.h>
+#include <NJGame.h>
+#include <NJConfig.h>
+#include <NJMovableSprite.h>
 
-using namespace std;
+#include <thread>
+#include <unistd.h>
+#include <iostream>
 
-void refr(CANVAS* screen,GAME* game)
+void refr(NJCanvas* screen,NJGame* game)
 {
 	while(!game->gameover())
 	{
@@ -18,7 +23,7 @@ int main()
 	curs_set(0);
 	noecho();		
 	
-	mvwprintw(stdscr,LINES/2,COLS/2-30,"HELLO :3 | THE GAME WILL START IN 5 SEC | ENJOY!");	
+    mvwprintw(stdscr,LINES/2,COLS/2-30,"HELLO :3 | THE NJGame WILL START IN 5 SEC | ENJOY!");
 	refresh();
 	sleep(5);
 
@@ -26,11 +31,11 @@ int main()
 	WINDOW* sub_screen = newwin(3,COLS,LINES-3,0);
 	WINDOW* score_bar = newwin(1,COLS,LINES-4,0);
 
-	CANVAS screen(LINES-4,COLS);
-	MOVABLE_SPRITE hero("./data/hero.spr",&screen);
-	GAME NewGame(&screen);
+    NJCanvas screen(LINES-4,COLS);
+    NJMovableSprite hero("../data/hero.spr",&screen);
+    NJGame NewGame(&screen);
 
-	NewGame.game_init("./data/map_I.mp");
+    NewGame.game_init("../data/map_I.mp");
 	NewGame.link_scorebar(score_bar);
 
 	hero.link_game(&NewGame);
@@ -50,7 +55,7 @@ int main()
 	wrefresh(sub_screen);
 	refresh();
 
-	thread thr(refr,&screen,&NewGame);
+    std::thread thr(refr,&screen,&NewGame);
 	thr.detach();
 
 	hero.gravitati_on();
@@ -93,13 +98,13 @@ int main()
 	wclear(sub_screen);
 	wrefresh(sub_screen);
 
-	mvwprintw(stdscr,LINES/2,COLS/2-4,"GAME OVER");	
+    mvwprintw(stdscr,LINES/2,COLS/2-4,"NJGame OVER");
 	refresh();
 	sleep(3);
 
 	endwin();
 
-	cout << "YOUR SCORE : " << NewGame.score << endl;
+    std::cout << "YOUR SCORE : " << NewGame.score << std::endl;
 		
 	return 0;
 }
