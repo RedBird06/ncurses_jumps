@@ -6,7 +6,6 @@ class NJMovableSprite : public NJSprite
 {
 private:
     NJMovableSprite();
-    NJCanvas* _screen;
     NJGame* _game;
 public:
     NJMovableSprite(const char* name, NJCanvas* canvas);
@@ -25,6 +24,7 @@ public:
 
     void link_game(NJGame* game);
     void link_screen(NJCanvas* screen);
-    void refr_screen();
+
+    void draw_on_screen(int line_from, int line_to);
 };
 

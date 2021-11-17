@@ -23,8 +23,8 @@ NJSprite::~NJSprite()
 }
 NJSprite::NJSprite(const char* name,NJCanvas* canvas)
 {
-    int length;
-    int height;
+    int length = 0;
+    int height = 0;
 
     std::ifstream fin(name);
     if(!fin.is_open())

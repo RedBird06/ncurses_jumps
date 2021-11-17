@@ -6,8 +6,8 @@ class NJSprite
 {
 protected:
     char** _sprite;
-    unsigned int _length;
-    unsigned int _height;
+    int _length;
+    int _height;
     coord _current;
     NJCanvas* spr_canvas;
 
@@ -16,7 +16,7 @@ protected:
     friend class NJGame;
 public:
     NJSprite(const char* name, NJCanvas* canvas);
-    NJSprite(char* platform, int length,NJCanvas* canvas);
+    NJSprite(char* platform, int length, NJCanvas* canvas);
     ~NJSprite();
 
     void draw(int l,int c);

@@ -7,16 +7,6 @@
 #include <unistd.h>
 #include <iostream>
 
-void refr(NJCanvas* screen,NJGame* game)
-{
-	while(!game->gameover())
-	{
-		screen->draw();
-		game->upd_scorebar();
-		usleep(Hz);
-	}
-}
-
 int main()
 {
 	initscr();
@@ -25,7 +15,7 @@ int main()
 	
     mvwprintw(stdscr,LINES/2,COLS/2-30,"HELLO :3 | THE NJGame WILL START IN 5 SEC | ENJOY!");
 	refresh();
-	sleep(5);
+    sleep(1);
 
 	WINDOW* main_screen = newwin(LINES-4,COLS,0,0);
 	WINDOW* sub_screen = newwin(3,COLS,LINES-3,0);
@@ -39,7 +29,6 @@ int main()
 	NewGame.link_scorebar(score_bar);
 
 	hero.link_game(&NewGame);
-	hero.link_screen(&screen);
 		
 	screen.link_window(main_screen);
 	hero.draw(23,4);
@@ -54,9 +43,6 @@ int main()
 	mvwprintw(sub_screen,1,COLS/2-45,"^ == DEATH | YOU SHOULD COLLECT * TO GAIN SCORE POINTS | GOOD LUCK! | PRESS 0 TO EXIT");
 	wrefresh(sub_screen);
 	refresh();
-
-    std::thread thr(refr,&screen,&NewGame);
-	thr.detach();
 
 	hero.gravitati_on();
 

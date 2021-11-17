@@ -6,7 +6,7 @@ NJCanvas::~NJCanvas()
 {
 	if(_canvas != NULL)
 	{
-		for(int i = 0;i<_lines;++i) delete [] _canvas[i];
+        for(int i = 0;i<_lines;++i) delete [] _canvas[i];
 		delete [] _canvas;
 	}
 	else
@@ -45,8 +45,19 @@ bool NJCanvas::link_window(WINDOW* win)
 }
 void NJCanvas::draw()
 {
-  for(int i = 0;i<_lines;++i) mvwprintw(_window,i,0,"%s",_canvas[i]);
+    for(int i = 0; i < _lines; ++i)
+    {
+        mvwprintw(_window, i, 0, "%s", _canvas[i]);
+    }
 	wrefresh(_window);	
+}
+void NJCanvas::draw(int line_from, int line_to)
+{
+    for(int i = line_from; i <= line_to; ++i)
+    {
+        mvwprintw(_window, i, 0, "%s", _canvas[i]);
+    }
+    wrefresh(_window);
 }
 void NJCanvas::cnv_show()
 {

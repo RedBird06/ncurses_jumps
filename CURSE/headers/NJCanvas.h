@@ -4,8 +4,8 @@
 class NJCanvas
 {
 private:
-	unsigned int _lines;
-	unsigned int _columns;
+    int _lines;
+    int _columns;
 
 	char** _canvas;
 	WINDOW* _window;
@@ -21,6 +21,7 @@ public:
 
 	bool link_window(WINDOW* win);
 	void draw();
+    void draw(int line_from, int line_to);
 	void cnv_show();
 	void clear();
 };

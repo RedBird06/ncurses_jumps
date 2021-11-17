@@ -25,14 +25,6 @@ void NJMovableSprite::link_game(NJGame* game)
 {
     _game = game;
 }
-void NJMovableSprite::link_screen(NJCanvas* screen)
-{
-    _screen = screen;
-}
-void NJMovableSprite::refr_screen()
-{
-    _screen->draw();
-}
 void NJMovableSprite::move_jump()
 {
     is_jump = true;
@@ -48,6 +40,7 @@ void NJMovableSprite::move_up()
     {
         erase();
         draw(_current.line-1,_current.column);
+        draw_on_screen(_current.line - 1, _current.line + _height + 1);
     }
 }
 void NJMovableSprite::move_down()
@@ -56,6 +49,7 @@ void NJMovableSprite::move_down()
     {
         erase();
         draw(_current.line+1,_current.column);
+        draw_on_screen(_current.line - 1, _current.line + _height + 1);
     }
 }
 void NJMovableSprite::move_right()
@@ -63,7 +57,8 @@ void NJMovableSprite::move_right()
     if(!collision('d'))
     {
         erase();
-        draw(_current.line,_current.column+1);
+        draw(_current.line, _current.column+1);
+        draw_on_screen(_current.line - 1, _current.line + _height + 1);
     }
 }
 void NJMovableSprite::move_left()
@@ -71,7 +66,8 @@ void NJMovableSprite::move_left()
     if(!collision('a'))
     {
         erase();
-        draw(_current.line,_current.column-1);
+        draw(_current.line, _current.column-1);
+        draw_on_screen(_current.line - 1, _current.line + _height + 1);
     }
 }
 bool NJMovableSprite::collision(char direction)
@@ -127,6 +123,15 @@ bool NJMovableSprite::collision(char direction)
         }
         default: return false;
 
+    }
+}
+
+void NJMovableSprite::draw_on_screen(int line_from, int line_to)
+{
+    if(!_game->gameover())
+    {
+        spr_canvas->draw(line_from, line_to);
+        _game->upd_scorebar();
     }
 }
 
